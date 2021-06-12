@@ -8,7 +8,13 @@ using System.Threading.Tasks;
 
 namespace WBL
 {
-    public class MarcaVehiculoService
+    public interface IMarcaVehiculoService
+    {
+        Task<IEnumerable<MarcaVehiculoEntity>> Get();
+        Task<MarcaVehiculoEntity> GetEntity(MarcaVehiculoEntity entity);
+    }
+
+    public class MarcaVehiculoService : IMarcaVehiculoService
     {
         private readonly IDataAccess sql;
 
@@ -37,7 +43,7 @@ namespace WBL
         }
 
 
-        public async Task<MarcaVehiculoEntity>GetEntity(MarcaVehiculoEntity entity)
+        public async Task<MarcaVehiculoEntity> GetEntity(MarcaVehiculoEntity entity)
         {
             try
             {
@@ -54,7 +60,63 @@ namespace WBL
                 throw;
             }
         }
-                
+
+        public async Task<DBEntity> Create(MarcaVehiculoEntity entity)
+        {
+            try
+            {
+                var result = sql.ExecuteAsync("MarcaVehiculoInsertar", new
+                {
+                    entity.Descripcion,
+                    entity.Estado
+                });
+
+                return await result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<DBEntity> Update(MarcaVehiculoEntity entity)
+        {
+            try
+            {
+                var result = sql.ExecuteAsync("MarcaVehiculoActualizar", new
+                {
+                    entity.MarcaVehiculoId,
+                    entity.Descripcion,
+                    entity.Estado
+                });
+
+                return await result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<DBEntity> Delete(MarcaVehiculoEntity entity)
+        {
+            try
+            {
+                var result = sql.ExecuteAsync("MarcaVehiculoEliminar", new
+                {
+                    entity.MarcaVehiculoId,                   
+                });
+
+                return await result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
 
     }
