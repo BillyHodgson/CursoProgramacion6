@@ -7,20 +7,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using WBL;
 using Entity;
 
-
-namespace WebApp.Pages.MarcaVehiculo
+namespace WebApp.Pages.Vehiculo
 {
     public class GridModel : PageModel
     {
-        private readonly IMarcaVehiculoService marcaVehiculoService;
+        private readonly IVehiculoService vehiculoService;
 
-        public GridModel(IMarcaVehiculoService marcaVehiculoService)
+        public GridModel(IVehiculoService vehiculoService)
         {
-            this.marcaVehiculoService = marcaVehiculoService;
+            this.vehiculoService = vehiculoService;
         }
 
 
-        public IEnumerable<MarcaVehiculoEntity> GridList { get; set; } = new List<MarcaVehiculoEntity>();
+        public IEnumerable<VehiculoEntity> GridList { get; set; } = new List<VehiculoEntity>();
 
         public string Mensaje { get; set; }
 
@@ -29,7 +28,7 @@ namespace WebApp.Pages.MarcaVehiculo
         {
             try
             {
-                GridList = await marcaVehiculoService.Get();
+                GridList = await vehiculoService.Get();
 
                 if (TempData.ContainsKey("Msg"))
                 {
@@ -55,10 +54,10 @@ namespace WebApp.Pages.MarcaVehiculo
         {
             try
             {
-                var result = await marcaVehiculoService.Delete(new MarcaVehiculoEntity()
+                var result = await vehiculoService.Delete(new VehiculoEntity()
                 {
 
-                    MarcaVehiculoId = id
+                    VehiculoId = id
 
                 });
 
@@ -68,7 +67,7 @@ namespace WebApp.Pages.MarcaVehiculo
 
                 }
 
-                TempData[ "Msg"] = "Se elimino correctamente";
+                TempData["Msg"] = "Se elimino correctamente";
 
                 return Redirect(url: "Grid");
             }

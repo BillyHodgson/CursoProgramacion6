@@ -10,8 +10,12 @@ namespace WBL
 {
     public interface IMarcaVehiculoService
     {
+        Task<DBEntity> Create(MarcaVehiculoEntity entity);
+        Task<DBEntity> Delete(MarcaVehiculoEntity entity);
         Task<IEnumerable<MarcaVehiculoEntity>> Get();
-        Task<MarcaVehiculoEntity> GetEntity(MarcaVehiculoEntity entity);
+        Task<IEnumerable<MarcaVehiculoEntity>> GetLista();
+        Task<MarcaVehiculoEntity> GetById(MarcaVehiculoEntity entity);
+        Task<DBEntity> Update(MarcaVehiculoEntity entity);
     }
 
     public class MarcaVehiculoService : IMarcaVehiculoService
@@ -42,8 +46,25 @@ namespace WBL
 
         }
 
+        public async Task<IEnumerable<MarcaVehiculoEntity>> GetLista()
+        {
+            try
+            {
+                var result = sql.QueryAsync<MarcaVehiculoEntity>("MarcaVehiculoLista");
 
-        public async Task<MarcaVehiculoEntity> GetEntity(MarcaVehiculoEntity entity)
+                return await result;
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+        public async Task<MarcaVehiculoEntity> GetById(MarcaVehiculoEntity entity)
         {
             try
             {
@@ -106,7 +127,7 @@ namespace WBL
             {
                 var result = sql.ExecuteAsync("MarcaVehiculoEliminar", new
                 {
-                    entity.MarcaVehiculoId,                   
+                    entity.MarcaVehiculoId,
                 });
 
                 return await result;

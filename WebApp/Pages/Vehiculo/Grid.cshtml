@@ -1,12 +1,14 @@
 ﻿@page
-@model WebApp.Pages.MarcaVehiculo.GridModel
+@model WebApp.Pages.Vehiculo.GridModel
 @{
 }
+
+<br />
 <div class="container">
 
     <div class="card">
         <div class="card-header">
-            MarcaVehiculo
+            Vehiculo
         </div>
         <div class="card-body">
 
@@ -20,7 +22,12 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Descripcion</th>
+                                <th>Marca</th>
+                                <th>Matricula</th>
+                                <th>Color</th>
+                                <th>Modelo</th>
+                                <th>Fecha Modelo</th>
+                                <th>Defectos</th>
                                 <th>Estado</th>
                                 <th>Accion</th>
                             </tr>
@@ -29,16 +36,21 @@
                             @foreach (var item in Model.GridList)
                             {
                                 <tr>
-                                    <td>@item.MarcaVehiculoId</td>
-                                    <td>@item.Descripcion</td>
+                                    <td>@item.VehiculoId</td>
+                                    <td>@item.MarcaVehiculo.Descripcion</td>
+                                    <td>@item.Matricula</td>
+                                    <td>@item.Color</td>
+                                    <td>@item.Modelo</td>
+                                    <td>@item.FechaModelo.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.Defectos</td>
                                     <td>@(item.Estado ? "Activo": "Inactivo")</td>
                                     <td>
-                                        <a class="btn btn-outline-primary" asp-page="Edit" asp-route-id="@item.MarcaVehiculoId">
+                                        <a class="btn btn-outline-primary" asp-page="Edit" asp-route-id="@item.VehiculoId">
                                             <i class='bx bxs-edit'></i>
                                         </a>
 
                                         <button type="button" class="btn btn-outline-primary"
-                                                onclick="MarcaVehiculoGrid.OnClickEliminar(@item.MarcaVehiculoId)">
+                                                onclick="VehiculoGrid.OnClickEliminar(@item.VehiculoId)">
                                             <i class='bx bx-trash'></i>
                                         </button>
                                     </td>
@@ -46,10 +58,10 @@
 
                             }
                         </tbody>
-                        </table>
-                    </div>
+                    </table>
                 </div>
             </div>
+        </div>
     </div>
 </div>
 
@@ -59,7 +71,9 @@
     <script>
         var MensajeApp = "@Html.Raw(Model.Mensaje)";
     </script>
-    <script defer src="~/App/MarcaVehiculo/Grid.js"></script>
+
+    <script defer src="~/App/Vehiculo/Grid.js"></script>
 
 
- }
+}
+
