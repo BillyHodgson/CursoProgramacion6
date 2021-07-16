@@ -15,7 +15,7 @@
 
                 <div class="form-group mb-3">
                     <label for="Entity.MarcaVehiculoId" class="form-label">Marca Vehiculo</label>
-                    <select asp-for="Entity.MarcaVehiculo" class="form-select"
+                    <select asp-for="Entity.MarcaVehiculoId" class="form-select"
                             asp-items="@(new SelectList(Model.MarcaVehiculoLista,"MarcaVehiculoId","Descripcion"))" required>
                     </select>
 
@@ -52,7 +52,7 @@
                 </div> 
 
 
-                <div v-show="Entity.TieneDefectos" class="form-group mb-3">
+                <div v-if="Entity.TieneDefectos" class="form-group mb-3">
                     <label for="Entity.Defectos" class="form-label">Defectos</label>
                     <textarea class="form-control"  rows="2" asp-for="Entity.Defectos" maxlength="1000" required></textarea>
                 </div>
@@ -60,7 +60,7 @@
 
                 <div class="form-group form-check form-switch">
                     <input type="checkbox" class="form-check-input" asp-for="Entity.Estado" value="true">
-                    <label for="Entity.Estado" class="form-check-label"> </label>
+                    <label for="Entity.Estado" class="form-check-label">Estado</label>
                 </div> <div class="row">
                     <div class="col-4">
                         <button type="submit" class="btn btn-outline-primary">
@@ -82,6 +82,6 @@
 
 @section Scripts{
 
-    <script defer src="~/App/MarcaVehiculo/Edit.js"></script>
+    <script defer src="~/App/Vehiculo/Edit.js"></script>
 
 }
