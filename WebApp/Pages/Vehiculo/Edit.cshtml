@@ -49,12 +49,12 @@
                     <label class="form-check-label" for="Entity_TieneDefectos">Defectos?</label>
                     <input type="checkbox" class="form-check-input" asp-for="Entity.TieneDefectos" v-model="Entity.TieneDefectos"
                            v-on:change="RefrescarValidaciones" value="true">
-                </div> 
+                </div>
 
 
                 <div v-if="Entity.TieneDefectos" class="form-group mb-3">
                     <label for="Entity.Defectos" class="form-label">Defectos</label>
-                    <textarea class="form-control"  rows="2" asp-for="Entity.Defectos" maxlength="1000" required></textarea>
+                    <textarea class="form-control" rows="2" asp-for="Entity.Defectos" maxlength="1000" required></textarea>
                 </div>
 
 
@@ -82,6 +82,7 @@
 
 @section Scripts{
 
-    <script defer src="~/App/Vehiculo/Edit.js"></script>
+
+    <script defere src="~/App/Vehiculo/Edit.js"></script>
 
 }
